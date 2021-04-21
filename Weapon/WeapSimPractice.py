@@ -92,3 +92,42 @@ def main():
 main()
 
 
+# import tkinter as tk
+# from tkinter import *
+
+# Simulator = tk.Tk()
+
+
+# Simulator.title("Fury Simulator")
+# Simulator.geometry("900x300")
+
+# instructions = tk.Label(Simulator , text = "This is intended to be a ghetto simulation.\n"
+# "Most buffs are held constant.")
+# instructions.pack()
+
+# #Create an entry box
+# weapon_label = tk.Label(Simulator , text = 'Enter weapon here: ')
+# weapon_label.pack()
+# weapon_input = tk.Entry(Simulator)
+# weapon_input.pack()
+
+# #create listbox
+# weapons_list = Listbox(Simulator , width = 50 , height = 5)
+# weapons_list.pack()
+
+
+# #pulls list of weapons user can select
+# weapon_query = []
+# weapon_query.__getitem__
+
+
+# duration_label = tk.Label(Simulator , text = 'Number of iterations:')
+# duration_label.pack()
+# duration_label1 = Spinbox(Simulator , from_ = 60 , to_= 600)
+# duration_label1.pack()
+
+# button = tk.Button(Simulator , text = "Begin Simulation" )
+# button.pack()
+
+# Simulator.mainloop()
+
