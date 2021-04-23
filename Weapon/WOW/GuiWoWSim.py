@@ -2,7 +2,8 @@
 
 import tkinter as tk
 from tkinter import *
-from WoWDBConnector import get_weapons
+from WoWDBConnector import *
+
 
 Simulator = tk.Tk()
 
@@ -86,8 +87,10 @@ button.pack()
 
 
 def button_action(weapon_input):
-    # print(weapon_input)
-    pass
+    weapon_stats = get_weapon_stats(weapon_input)
+    return weapon_stats
+    
+    
 
 ##### Use pop out window for comparisons?maybe
 

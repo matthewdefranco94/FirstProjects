@@ -23,7 +23,7 @@ def get_weapons():
     return names
 
 
-def weapon_stats(weapon_name):
+def get_weapon_stats(weapon_name):
     query = "SELECT dmg_min1,dmg_min2,delay FROM wow_db.item_template where name = '" + weapon_name + "'"
     cur.execute(query)
     
