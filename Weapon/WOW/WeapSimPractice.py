@@ -5,11 +5,10 @@ import sys
 sys.path.append ('../../../../../../Desktop/Projects')
 
 import random
-import WeaponSimulation
+# import WeaponSimulation
 import numpy as np
 import random
 import matplotlib
-import WeaponSimInput
 
 #Attacks have a 40% chance to glance for 30% less damage, weaponskill reduces the 30% damage penatly
 #Weapon skill affecting glancing penalty
@@ -44,34 +43,32 @@ def damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit , cr
 
     return effective_weapon_damage
 
-class WeaponInput:
-    WeaponStats = {
-        "weapon_top_end" : 435,
-        "weapon_bottom_end" : 235,
-        "weapon_speed" : 3.8,
-        # "added_weapon_skill" : 0,
-        # "crit_chance" : 40,
-        # "total_hit" : 9,
-        # "fight_duration" : 120
-    }
 
+# WeaponStats = {
+#     "weapon_top_end" : 435,
+#     "weapon_bottom_end" : 235,
+#     "weapon_speed" : 3.8,
+#     "added_weapon_skill" : 0,
+#     "crit_chance" : 40,
+#     "total_hit" : 9,
+#     "fight_duration" : 120
+# }
 
-def main():
-    weapon_top_end = float(WeaponInput.WeaponStats["weapon_top_end"])
-    weapon_bottom_end = float(WeaponInput.WeaponStats["weapon_bottom_end"])
-    weapon_speed = float(WeaponInput.WeaponStats["weapon_speed"])
-    added_weapon_skill = int(WeaponInput.WeaponStats["added_weapon_skill"])
-    crit_chance = float(WeaponInput.WeaponStats["crit_chance"])
-    total_hit = int(WeaponInput.WeaponStats["total_hit"])
-    fight_duration = int(WeaponInput.WeaponStats["fight_duration"])
+def do_simulation(
+                    weapon_bottom_end, 
+                    weapon_top_end ,
+                    total_hit , 
+                    crit_chance ,
+                    added_weapon_skill,
+                    fight_duration,
+                    weapon_speed):
 
     static_weap_DPS = ((weapon_top_end + weapon_bottom_end) / 2) / weapon_speed
     static_weap_DPS = round(static_weap_DPS)
     total_dmg = []
     num_attacks = float(fight_duration) / float(weapon_speed)
     num_attacks = round(num_attacks)
-
-   #attack iterator
+     #attack iterator
     for i in range(round(num_attacks)):
         damage_result = damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit, crit_chance)
         total_dmg.append(damage_result)
@@ -89,7 +86,24 @@ def main():
     miss_count = total_dmg.count(0)
     print("Your number of missed attacks is " + str(miss_count) + ".")
 
-main()
+
+
+
+
+# def main():
+#     weapon_top_end = float(WeaponInput.WeaponStats["weapon_top_end"])
+#     weapon_bottom_end = float(WeaponInput.WeaponStats["weapon_bottom_end"])
+#     weapon_speed = float(WeaponInput.WeaponStats["weapon_speed"])
+#     added_weapon_skill = int(WeaponInput.WeaponStats["added_weapon_skill"])
+#     crit_chance = float(WeaponInput.WeaponStats["crit_chance"])
+#     total_hit = int(WeaponInput.WeaponStats["total_hit"])
+#     fight_duration = int(WeaponInput.WeaponStats["fight_duration"])
+
+
+
+  
+
+# main()
 
 
 # import tkinter as tk

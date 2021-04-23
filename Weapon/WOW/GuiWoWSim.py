@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import *
 from WoWDBConnector import *
+from WeapSimPractice import do_simulation
+
 
 
 Simulator = tk.Tk()
@@ -88,7 +90,7 @@ button.pack()
 
 def button_action(weapon_input):
     weapon_stats = get_weapon_stats(weapon_input)
-    return weapon_stats
+    do_simulation(5,6,6,7,4,120,3)
     
     
 
