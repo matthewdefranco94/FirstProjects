@@ -90,7 +90,8 @@ button.pack()
 
 def button_action(weapon_input):
     weapon_stats = get_weapon_stats(weapon_input)
-    do_simulation(5,6,6,7,4,120,3)
+    do_simulation(weapon_stats['dmg_min1'],weapon_stats['dmg_max1'],weapon_stats['delay']/1000,5,40,5,120)
+    
     
     
 

@@ -55,13 +55,14 @@ def damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit , cr
 # }
 
 def do_simulation(
-                    weapon_bottom_end, 
+                    weapon_bottom_end , 
                     weapon_top_end ,
+                    weapon_speed ,
                     total_hit , 
                     crit_chance ,
-                    added_weapon_skill,
-                    fight_duration,
-                    weapon_speed):
+                    added_weapon_skill ,
+                    fight_duration ,
+                    ):
 
     static_weap_DPS = ((weapon_top_end + weapon_bottom_end) / 2) / weapon_speed
     static_weap_DPS = round(static_weap_DPS)
