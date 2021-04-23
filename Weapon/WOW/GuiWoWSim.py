@@ -90,8 +90,22 @@ button.pack()
 
 def button_action(weapon_input):
     weapon_stats = get_weapon_stats(weapon_input)
-    do_simulation(weapon_stats['dmg_min1'],weapon_stats['dmg_max1'],weapon_stats['delay']/1000,5,40,5,120)
+    result = do_simulation(weapon_stats['dmg_min1'],weapon_stats['dmg_max1'],weapon_stats['delay']/1000,5,40,5,120)
+    #saying result is equal to what 'do_simulation' gives back
+
+    print(result.total_damage)
+        
+
+    print(f"Your total damage across {result.number_of_attacks} attacks is {round(sum(result.total_damage))}")
+    #Damage per second accounting for other variables
+    DPS = float(sum(result.total_damage)) / round(result.fight_duration)
+    DPS = round(result.average_DPS)
+    print("You deal an average of " + str(result.average_DPS) + " DPS over a " + str(round(result.fight_duration / 60)) + " minute long fight.")
+    print("Your static weapon DPS is " + str(result.weapon_DPS) + ".")
     
+    #number of missed attacks
+    miss_count = result.total_damage.count(0)
+    print("Your number of missed attacks is " + str(miss_count) + ".")
     
     
 

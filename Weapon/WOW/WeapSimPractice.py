@@ -9,6 +9,7 @@ import random
 import numpy as np
 import random
 import matplotlib
+from dataclasses import dataclass
 
 #Attacks have a 40% chance to glance for 30% less damage, weaponskill reduces the 30% damage penatly
 #Weapon skill affecting glancing penalty
@@ -44,15 +45,16 @@ def damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit , cr
     return effective_weapon_damage
 
 
-# WeaponStats = {
-#     "weapon_top_end" : 435,
-#     "weapon_bottom_end" : 235,
-#     "weapon_speed" : 3.8,
-#     "added_weapon_skill" : 0,
-#     "crit_chance" : 40,
-#     "total_hit" : 9,
-#     "fight_duration" : 120
-# }
+
+@dataclass
+class SimulationResult():
+    number_of_attacks : int
+    total_damage : list[int]
+    fight_duration : float
+    average_DPS : float
+    weapon_DPS : float
+
+#see this as a template for below 
 
 def do_simulation(
                     weapon_bottom_end , 
@@ -64,26 +66,23 @@ def do_simulation(
                     fight_duration ,
                     ):
 
+    print(weapon_top_end)
+    print(weapon_bottom_end)
+    print(weapon_speed)
+
+
     static_weap_DPS = ((weapon_top_end + weapon_bottom_end) / 2) / weapon_speed
     static_weap_DPS = round(static_weap_DPS)
-    total_dmg = []
+    attack_damages = []
+    fight_duration = 120
     num_attacks = float(fight_duration) / float(weapon_speed)
     num_attacks = round(num_attacks)
+    average_DPS = sum(attack_damages) / num_attacks
+
      #attack iterator
     for i in range(round(num_attacks)):
         damage_result = damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit, crit_chance)
-        total_dmg.append(damage_result)
-    print(np.round(total_dmg))
-        
+        attack_damages.append(damage_result)
 
-    print(f"Your total damage across {num_attacks} attacks is {round(sum(total_dmg))}")
-    #Damage per second accounting for other variables
-    DPS = float(sum(total_dmg)) / round(fight_duration)
-    DPS = round(DPS)
-    print("You deal an average of " + str(DPS) + " DPS over a " + str(round(fight_duration / 60)) + " minute long fight.")
-    print("Your static weapon DPS is " + str(static_weap_DPS) + ".")
-    
-    #number of missed attacks
-    miss_count = total_dmg.count(0)
-    print("Your number of missed attacks is " + str(miss_count) + ".")
+    return SimulationResult(num_attacks, attack_damages , fight_duration , average_DPS , static_weap_DPS)
 
