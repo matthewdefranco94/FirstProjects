@@ -7,16 +7,16 @@ from WeapSimPractice import do_simulation
 
 
 
-class WoWSimGui():
-    def __init__(self):
+class WoWSimGui:
+    def __init__(self , width = 900 , height = 400):
 
         self.Simulator = tk.Tk()
 
 
         self.Simulator.title("Fury Simulator")
-        self.Simulator.geometry("900x400") #WxH
+        self.Simulator.geometry(str(width)+'x'+str(height)) #WxH
 
-        self.instructions = tk.Label(self.Simulator , text = "This is intended to be a ghetto simulation.\n"
+        self.instructions = tk.Label(self.Simulator , text = "This is intended to be a simulation.\n"
         "Most buffs are held constant.")
         self.instructions.pack()
 
