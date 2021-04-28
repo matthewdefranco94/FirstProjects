@@ -6,7 +6,6 @@ from WoWDBConnector import *
 from WeapSimPractice import do_simulation
 
 
-
 Simulator = tk.Tk()
 
 
@@ -71,16 +70,29 @@ def check_listbox(event):
     update(list_data)
 
 
+def user_input(label , max_box):
+    input_label = tk.Label(Simulator , text = label )
+    input_label.pack()
+    spinbox_labeler = tk.Spinbox(Simulator , from_ = 0 , to_ = max_box)
+    spinbox_labeler.pack()
+
+
+
+user_input('What is your total hit chance' , 60)
+
+user_input("What is your critical chance?" , 60)
+
+user_input('What is your added weapon skill?' , 60)
+
+user_input('Number of iterations:' , 200)
+
+
+
 #Create binding on entry box to autofill
 weapon_input.bind("<KeyRelease>" , check_listbox)
 
 #Listboxs = <<>> , single actions = <> , select from the listbox
 weapons_list.bind("<<ListboxSelect>>" , fillout)
-
-duration_label = tk.Label(Simulator , text = 'Number of iterations:')
-duration_label.pack()
-duration_label1 = Spinbox(Simulator , from_ = 60 , to_= 600)
-duration_label1.pack()
 
 
 button = tk.Button(Simulator , text = "Begin Simulation" , command = lambda: button_action(weapon_input.get()))
@@ -90,7 +102,10 @@ button.pack()
 
 def button_action(weapon_input):
     weapon_stats = get_weapon_stats(weapon_input)
-    result = do_simulation(weapon_stats['dmg_min1'],weapon_stats['dmg_max1'],weapon_stats['delay']/1000,5,40,5,120)
+    result = do_simulation(weapon_stats['dmg_min1'],
+                            weapon_stats['dmg_max1'],
+                            weapon_stats['delay']/1000,
+                            5,40,5,120)
     #saying result is equal to what 'do_simulation' gives back
 
     print(result.total_damage)

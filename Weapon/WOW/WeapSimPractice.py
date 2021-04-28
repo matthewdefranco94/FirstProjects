@@ -56,33 +56,35 @@ class SimulationResult():
 
 #see this as a template for below 
 
-def do_simulation(
-                    weapon_bottom_end , 
+def do_simulation( weapon_bottom_end , 
                     weapon_top_end ,
                     weapon_speed ,
                     total_hit , 
                     crit_chance ,
                     added_weapon_skill ,
-                    fight_duration ,
-                    ):
+                    fight_duration ,):
 
-    print(weapon_top_end)
-    print(weapon_bottom_end)
-    print(weapon_speed)
+    # print(weapon_top_end)
+    # print(weapon_bottom_end)
+    # print(weapon_speed)
 
 
     static_weap_DPS = ((weapon_top_end + weapon_bottom_end) / 2) / weapon_speed
     static_weap_DPS = round(static_weap_DPS)
-    attack_damages = []
+
     fight_duration = 120
+
     num_attacks = float(fight_duration) / float(weapon_speed)
     num_attacks = round(num_attacks)
+
     average_DPS = sum(attack_damages) / num_attacks
 
-     #attack iterator
+    attack_damages = []
+    #attack iterator
     for i in range(round(num_attacks)):
         damage_result = damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit, crit_chance)
         attack_damages.append(damage_result)
 
-    return SimulationResult(num_attacks, attack_damages , fight_duration , average_DPS , static_weap_DPS)
+    return SimulationResult(num_attacks, attack_damages , fight_duration , 
+    average_DPS , static_weap_DPS)
 
