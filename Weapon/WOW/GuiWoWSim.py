@@ -75,16 +75,21 @@ def user_input(label , max_box):
     input_label.pack()
     spinbox_labeler = tk.Spinbox(Simulator , from_ = 0 , to_ = max_box)
     spinbox_labeler.pack()
+    return spinbox_labeler
 
 
 
-user_input('What is your total hit chance' , 60)
+user_hit_chance = user_input('What is your total hit chance' , 60)
 
-user_input("What is your critical chance?" , 60)
+user_crit_chance = user_input("What is your critical chance?" , 60)
 
-user_input('What is your added weapon skill?' , 60)
+user_weapskill = user_input('What is your added weapon skill?' , 60)
 
-user_input('Number of iterations:' , 200)
+user_fight_duration = user_input('How long is your fight in seconds? (no longer than 6 minutes)' , 600 )
+
+user_iterations = user_input('Number of iterations:' , 200)
+
+
 
 
 
@@ -102,10 +107,11 @@ button.pack()
 
 def button_action(weapon_input):
     weapon_stats = get_weapon_stats(weapon_input)
-    result = do_simulation(weapon_stats['dmg_min1'],
-                            weapon_stats['dmg_max1'],
-                            weapon_stats['delay']/1000,
-                            5,40,5,120)
+    result = do_simulation( int(weapon_stats['dmg_min1']),
+                            int(weapon_stats['dmg_max1']),
+                            int(weapon_stats['delay'])/1000,
+                            int(user_hit_chance.get()), int(user_crit_chance.get()),
+                            int(user_weapskill.get()), int(user_iterations.get()))
     #saying result is equal to what 'do_simulation' gives back
 
     print(result.total_damage)
@@ -113,7 +119,7 @@ def button_action(weapon_input):
 
     print(f"Your total damage across {result.number_of_attacks} attacks is {round(sum(result.total_damage))}")
     #Damage per second accounting for other variables
-    DPS = float(sum(result.total_damage)) / round(result.fight_duration)
+    DPS = float(sum(result.total_damage)) / int(result.fight_duration)
     DPS = round(result.average_DPS)
     print("You deal an average of " + str(result.average_DPS) + " DPS over a " + str(round(result.fight_duration / 60)) + " minute long fight.")
     print("Your static weapon DPS is " + str(result.weapon_DPS) + ".")

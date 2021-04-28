@@ -12,7 +12,7 @@ cur = db.cursor()
 # user_input = "Lupine Axe"
 def get_weapons():
     # query = """SELECT entry,name,dmg_min2,dmg_max2,sheath FROM wow_db.item_template where sheath > 0 and name = %s"""
-    query = "SELECT name FROM wow_db.item_template where sheath > 0 ORDER BY name DESC"
+    query = "SELECT entry,name,dmg_min1,dmg_max1,sheath FROM wow_db.item_template where sheath != 0 and sheath != 4 ORDER BY name DESC"
     cur.execute(query)
     weapons = cur.fetchall()
     

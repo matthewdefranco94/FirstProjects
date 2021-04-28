@@ -11,6 +11,8 @@ import random
 import matplotlib
 from dataclasses import dataclass
 
+
+
 #Attacks have a 40% chance to glance for 30% less damage, weaponskill reduces the 30% damage penatly
 #Weapon skill affecting glancing penalty
 def damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit , crit_chance):
@@ -19,6 +21,12 @@ def damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit , cr
     weapon_skill_reduction = 0.03
     base_miss = 0.28
     critical_strike_modifier = 1.5
+
+    weapon_top_end = int(weapon_top_end)
+    weapon_bottom_end = int(weapon_bottom_end)
+    added_weapon_skill = int(added_weapon_skill)
+    total_hit = int(total_hit)
+    crit_chance = int(crit_chance)
     
     eff_miss = base_miss - total_hit / 100
 
@@ -72,18 +80,18 @@ def do_simulation( weapon_bottom_end ,
     static_weap_DPS = ((weapon_top_end + weapon_bottom_end) / 2) / weapon_speed
     static_weap_DPS = round(static_weap_DPS)
 
-    fight_duration = 120
 
     num_attacks = float(fight_duration) / float(weapon_speed)
     num_attacks = round(num_attacks)
 
-    average_DPS = sum(attack_damages) / num_attacks
 
     attack_damages = []
     #attack iterator
     for i in range(round(num_attacks)):
         damage_result = damage(weapon_top_end, weapon_bottom_end, added_weapon_skill, total_hit, crit_chance)
         attack_damages.append(damage_result)
+
+    average_DPS = sum(attack_damages) / num_attacks
 
     return SimulationResult(num_attacks, attack_damages , fight_duration , 
     average_DPS , static_weap_DPS)
