@@ -39,15 +39,15 @@ class WoWSimGui:
         self.weapon_query = get_weapons()
         self.update(self.weapon_query)                  ####original location
 
-        self.user_hit_chance = self.user_input('What is your total hit chance' , 60)
+        self.user_hit_chance = self.user_input('What is your total hit chance' , 60 )
 
         self.user_crit_chance = self.user_input("What is your critical chance?" , 60)
 
         self.user_weapskill = self.user_input('What is your added weapon skill?' , 60)
 
-        self.user_fight_duration = self.user_input('How long is your fight in seconds? (no longer than 6 minutes)' , 600 )
+        self.user_fight_duration = self.user_input('How long is your fight in seconds? (no longer than 6 minutes)' , 600 , min_box = 60 )
 
-        self.user_iterations = self.user_input('Number of iterations:' , 200)
+        self.user_iterations = self.user_input('Number of iterations:' , 200 , min_box = 10)
 
         #Create binding on entry box to autofill
         self.weapon_input.bind("<KeyRelease>" , self.check_listbox)
@@ -60,8 +60,6 @@ class WoWSimGui:
 
         
         self.Simulator.mainloop()
-
-
 
 
     #Update the listbox
@@ -97,13 +95,13 @@ class WoWSimGui:
                     list_data.append(weapon)
 
         #update listbox with selected item
-        update(list_data)
+        self.update(list_data)
 
 
-    def user_input(self , label , max_box):
+    def user_input(self , label , max_box , min_box = 1):
         input_label = tk.Label(self.Simulator , text = label )
         input_label.pack()
-        spinbox_labeler = tk.Spinbox(self.Simulator , from_ = 0 , to_ = max_box)
+        spinbox_labeler = tk.Spinbox(self.Simulator , from_ = min_box , to_ = max_box)
         spinbox_labeler.pack()
         return spinbox_labeler
 
