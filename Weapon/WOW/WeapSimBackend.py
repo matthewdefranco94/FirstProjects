@@ -93,6 +93,16 @@ def do_simulation( weapon_bottom_end ,
 
     average_DPS = sum(attack_damages) / num_attacks
 
+    # damage_distribution = []
+    # for i in range(user_iterations.get()):
+    #     result = average_DPS*(user_iterations)
+    #     damage_distribution.append(result)
+
+    # print(damage_distribution)
+
+
     return SimulationResult(num_attacks, attack_damages , fight_duration , 
     average_DPS , static_weap_DPS)
+
+   
 
