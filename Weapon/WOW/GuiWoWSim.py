@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import *
 from WoWDBConnector import *
-from WeapSimPractice import do_simulation
+from WeapSimBackend import do_simulation
 
 
 
@@ -47,7 +47,7 @@ class WoWSimGui:
 
         self.user_fight_duration = self.user_input('How long is your fight in seconds? (no longer than 6 minutes)' , 600 , min_box = 60 )
 
-        self.user_iterations = self.user_input('Number of iterations:' , 200 , min_box = 10)
+        self.user_iterations = self.user_input('Number of iterations:' , 20000 , min_box = 1000)
 
         #Create binding on entry box to autofill
         self.weapon_input.bind("<KeyRelease>" , self.check_listbox)
@@ -111,8 +111,10 @@ class WoWSimGui:
         result = do_simulation( int(weapon_stats['dmg_min1']),
                                 int(weapon_stats['dmg_max1']),
                                 int(weapon_stats['delay'])/1000,
-                                int(self.user_hit_chance.get()), int(self.user_crit_chance.get()),
-                                int(self.user_weapskill.get()), int(self.user_iterations.get()))
+                                int(self.user_hit_chance.get()), 
+                                int(self.user_crit_chance.get()),
+                                int(self.user_weapskill.get()), 
+                                int(self.user_fight_duration.get()) )
         #saying result is equal to what 'do_simulation' gives back
 
         print(result.total_damage)
