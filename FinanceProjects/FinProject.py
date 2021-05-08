@@ -4,14 +4,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from datetime import datetime
 from pandas_datareader import data as web
+import time
 
 
 
 ##############
-#Some user input here#
+#Some user input here , possibly a GUI#
 
 
 
+start_time = time.time()
 
 
 assets = ['FB' , 'TWTR' , 'CX' , 'NFLX' , 'AMD']
@@ -28,7 +30,7 @@ for stock in assets:
     df[stock] = web.DataReader(stock , data_source = 'yahoo' , start = stockStartDate , end = today)['Adj Close']
 
 
-title = 'Portfolio adj price history'
+title = 'Daily Percentage Change'
 
 my_stocks = df
 
@@ -36,7 +38,7 @@ my_stocks = df
 def returns():
 #create and plot graph (loops through each column)
     for columns in my_stocks.columns.values:
-        my_stocks[columns] = my_stocks[columns].pct_change(periods = 1)
+        my_stocks[columns] = my_stocks[columns].pct_change(periods = 10)
         plt.plot(my_stocks[columns] , label = my_stocks)
 
     plt.title(title)
@@ -48,5 +50,9 @@ def returns():
     # for items in my_stocks.columns.values:
     #     my_stocks[items] = my_stocks[columns].std()
 
-def return_distribution():
-    
+# def return_distribution():
+
+
+print("--- %s seconds ---" % (time.time() - start_time))
+
+returns()
