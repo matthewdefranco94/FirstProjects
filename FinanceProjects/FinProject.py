@@ -9,8 +9,7 @@ import time
 
 
 ##############
-#Some user input here , possibly a GUI#
-
+#Some user input here , possibly a GUI for selecting stocks#
 
 
 start_time = time.time()
@@ -52,7 +51,6 @@ def returns():
 
 # def return_distribution():
 
+returns()
 
 print("--- %s seconds ---" % (time.time() - start_time))
-
-returns()
